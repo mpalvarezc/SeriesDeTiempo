@@ -1,0 +1,1595 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Entrega Ejericio series de tiempo &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script src="_static/documentation_options.js?v=c73c0f3e"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'TimeSeries';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><span style="color:steelblue">Entrega Ejericio series de tiempo</span></a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FTimeSeries.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/TimeSeries.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><span style="color:steelblue">Entrega Ejericio series de tiempo</span></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span style="color:steelblue">Entrega Ejericio series de tiempo</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias"><span style="color:white">Librerias</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considere-la-serie-de-tiempo-asociada-con-los-futuros-de-la-criptomoneda-bitcoin-desde-que-comenzo-a-comercializarse-hasta-la-fecha-del-dia-de-hoy-utilice-la-api-de-yahoo-finance-para-obtener-esta-serie-de-tiempo">1.Considere la serie de tiempo asociada con los futuros de la criptomoneda Bitcoin desde que comenzó a comercializarse hasta la fecha del día de hoy. Utilice la API de <span style="color:BlueViolet">Yahoo Finance</span> para obtener esta serie de tiempo.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repita-todos-los-pasos-indicados-en-esta-seccion-para-encontrar-modelos-arima-para-predecir-el-precio-de-bitcoin-con-los-siguientes-horizontes-7-14-21-y-28-dias-utilizar-siempre-predicciones-usando-rolling-con-ventana-de-prediccion-continua-de-un-dia-cualquier-cantidad-de-pasos-extra-para-enriquecer-su-analisis-predictivo-seran-aceptados-siempre-y-cuando-sean-acordes-con-lo-que-indica-la-teoria-de-analisis-de-series-de-tiempo">2. Repita TODOS los pasos indicados en esta sección para encontrar modelos ARIMA para predecir el precio de Bitcoin con los siguientes horizontes: 7, 14, 21 y 28 días. Utilizar siempre predicciones usando rolling con ventana de predicción continua de un día. Cualquier cantidad de pasos extra para enriquecer su análisis predictivo serán aceptados siempre y cuando sean acordes con lo que indica la teoría de análisis de series de tiempo.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repita-el-paso-2-ahora-sin-utilizar-rolling-forecast-esto-es-realice-el-pronostico-solo-utilizando-forecast-para-los-diferentes-horizontes-de-prediccion-7-14-21-y-28-dias">3. Repita el paso 2 ahora sin utilizar <span style="color:Steelblue">Rolling Forecast</span>. Esto es, realice el pronóstico solo utilizando forecast() para los diferentes horizontes de predicción, 7, 14, 21 y 28 días.</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="entrega-ejericio-series-de-tiempo">
+<h1><span style="color:steelblue">Entrega Ejericio series de tiempo</span><a class="headerlink" href="#entrega-ejericio-series-de-tiempo" title="Link to this heading">#</a></h1>
+<p>Hecho por: Daniel Piñeres y Maria Paula Alvarez</p>
+<p>Fecha: 2024-04-11</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="librerias">
+<h1><span style="color:white">Librerias</span><a class="headerlink" href="#librerias" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tools.sm_exceptions</span> <span class="kn">import</span> <span class="n">ConvergenceWarning</span>
+
+<span class="c1"># Suprimir advertencias de convergencia de statsmodels</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">ConvergenceWarning</span><span class="p">)</span>
+
+<span class="c1">#!pip install yahoo_fin</span>
+<span class="c1">#!pip install requests_html</span>
+<span class="c1">#!pip install yfinance</span>
+
+<span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="kn">from</span> <span class="nn">yahoo_fin.stock_info</span> <span class="kn">import</span> <span class="n">get_data</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">yahoo_fin.stock_info</span> <span class="kn">import</span> <span class="n">get_data</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">statsmodels.graphics.tsaplots</span> <span class="kn">import</span> <span class="n">plot_acf</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">adfuller</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">log</span>
+<span class="kn">from</span> <span class="nn">statsmodels.graphics.tsaplots</span> <span class="kn">import</span> <span class="n">plot_predict</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.arima.model</span> <span class="kn">import</span> <span class="n">ARIMA</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">13</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1">#!pip install yahoo_fin</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1">#!pip install requests_html</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1">#!pip install yfinance</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="ne">---&gt; </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">yahoo_fin.stock_info</span> <span class="kn">import</span> <span class="n">get_data</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;yahoo_fin&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Función para calcular métricas de precisión de las predicciones</span>
+<span class="k">def</span> <span class="nf">forecast_accuracy</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span> <span class="n">actual</span><span class="p">):</span>
+    <span class="n">mape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">forecast</span> <span class="o">-</span> <span class="n">actual</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">actual</span><span class="p">))</span>  <span class="c1"># MAPE</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">forecast</span> <span class="o">-</span> <span class="n">actual</span><span class="p">))</span>                    <span class="c1"># MAE</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">forecast</span><span class="p">))</span>        <span class="c1"># RMSE</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">forecast</span><span class="p">)</span>                  <span class="c1"># MSE</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">forecast</span><span class="p">)</span>                             <span class="c1"># R2</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span> <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="n">mae</span><span class="p">,</span> <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span> <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="n">mse</span><span class="p">,</span> <span class="s1">&#39;R2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="considere-la-serie-de-tiempo-asociada-con-los-futuros-de-la-criptomoneda-bitcoin-desde-que-comenzo-a-comercializarse-hasta-la-fecha-del-dia-de-hoy-utilice-la-api-de-yahoo-finance-para-obtener-esta-serie-de-tiempo">
+<h2>1.Considere la serie de tiempo asociada con los futuros de la criptomoneda Bitcoin desde que comenzó a comercializarse hasta la fecha del día de hoy. Utilice la API de <span style ="color:BlueViolet">Yahoo Finance</span> para obtener esta serie de tiempo.<a class="headerlink" href="#considere-la-serie-de-tiempo-asociada-con-los-futuros-de-la-criptomoneda-bitcoin-desde-que-comenzo-a-comercializarse-hasta-la-fecha-del-dia-de-hoy-utilice-la-api-de-yahoo-finance-para-obtener-esta-serie-de-tiempo" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stock</span> <span class="o">=</span><span class="s1">&#39;BTC-USD&#39;</span>
+<span class="n">resolution</span> <span class="o">=</span> <span class="s1">&#39;1d&#39;</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se escoge la fecha más lejana posible para asegurar tener la fecha de creación del stock en <span style ="color:BlueViolet">Yahoo Finance</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">date_format</span><span class="p">(</span><span class="n">date_h</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">date_h</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%Y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">BTC_df</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span><span class="n">stock</span><span class="p">,</span><span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span><span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span><span class="n">interval</span><span class="o">=</span><span class="n">resolution</span><span class="p">,</span><span class="n">index_as_date</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">BTC_df</span> <span class="o">=</span> <span class="n">BTC_df</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span>
+<span class="n">close_prices</span> <span class="o">=</span> <span class="n">BTC_df</span><span class="p">[</span><span class="s1">&#39;close&#39;</span><span class="p">]</span>
+<span class="n">BTC_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>open</th>
+      <th>high</th>
+      <th>low</th>
+      <th>close</th>
+      <th>adjclose</th>
+      <th>volume</th>
+      <th>ticker</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2014-09-17</td>
+      <td>465.864014</td>
+      <td>468.174011</td>
+      <td>452.421997</td>
+      <td>457.334015</td>
+      <td>457.334015</td>
+      <td>21056800</td>
+      <td>BTC-USD</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2014-09-18</td>
+      <td>456.859985</td>
+      <td>456.859985</td>
+      <td>413.104004</td>
+      <td>424.440002</td>
+      <td>424.440002</td>
+      <td>34483200</td>
+      <td>BTC-USD</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2014-09-19</td>
+      <td>424.102997</td>
+      <td>427.834991</td>
+      <td>384.532013</td>
+      <td>394.795990</td>
+      <td>394.795990</td>
+      <td>37919700</td>
+      <td>BTC-USD</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2014-09-20</td>
+      <td>394.673004</td>
+      <td>423.295990</td>
+      <td>389.882996</td>
+      <td>408.903992</td>
+      <td>408.903992</td>
+      <td>36863600</td>
+      <td>BTC-USD</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2014-09-21</td>
+      <td>408.084991</td>
+      <td>412.425995</td>
+      <td>393.181000</td>
+      <td>398.821014</td>
+      <td>398.821014</td>
+      <td>26580100</td>
+      <td>BTC-USD</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_plot_series</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">series_name</span><span class="p">,</span> <span class="n">series_index</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+  <span class="n">palette</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">palettes</span><span class="o">.</span><span class="n">mpl_palette</span><span class="p">(</span><span class="s1">&#39;Dark2&#39;</span><span class="p">))</span>
+  <span class="n">xs</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span>
+  <span class="n">ys</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="s1">&#39;close&#39;</span><span class="p">]</span>
+
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">series_name</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">palette</span><span class="p">[</span><span class="n">series_index</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">palette</span><span class="p">)])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">),</span> <span class="n">layout</span><span class="o">=</span><span class="s1">&#39;constrained&#39;</span><span class="p">)</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">BTC_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">_plot_series</span><span class="p">(</span><span class="n">df_sorted</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/89d0b558f6147be21ba3dba8b3a5fecc90f14706f7b3ef6060c20f79d14325e3.png" src="_images/89d0b558f6147be21ba3dba8b3a5fecc90f14706f7b3ef6060c20f79d14325e3.png" />
+</div>
+</div>
+<p>Verificación de estacionaridedad de la serie de tiempo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">BTC_df</span><span class="o">.</span><span class="n">close</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ADF Statistic: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p value: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ADF Statistic: -1.882474
+p value: 0.340350
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ya que el p-value&gt; 0.05 no se rechaza la hipotesis nula y por lo tanto se concluye que la serie de tiempo es no estacionaria. Al ser <em><span style ="color:red">no</span></em> estacionaria, se deben tomar medidas para convertirla en estacionaria antes de aplicar un modelo ARIMA. Esto implica diferenciar la serie, es decir, transformar la serie tomando la diferencia de observaciones consecutivas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">)})</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">BTC_df</span><span class="o">.</span><span class="n">close</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original Series&#39;</span><span class="p">)</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">BTC_df</span><span class="o">.</span><span class="n">close</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">240</span><span class="p">);</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">BTC_df</span><span class="o">.</span><span class="n">close</span><span class="o">.</span><span class="n">diff</span><span class="p">());</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;1st Order Differencing&#39;</span><span class="p">)</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">BTC_df</span><span class="o">.</span><span class="n">close</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">240</span><span class="p">);</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">BTC_df</span><span class="o">.</span><span class="n">close</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">diff</span><span class="p">());</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;2nd Order Differencing&#39;</span><span class="p">)</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">BTC_df</span><span class="o">.</span><span class="n">close</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">240</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ed0e0d1cb1385afef7dc122b4641a082c556ffdb26d2c8cf119a990cd8a5d490.png" src="_images/ed0e0d1cb1385afef7dc122b4641a082c556ffdb26d2c8cf119a990cd8a5d490.png" />
+</div>
+</div>
+<p>Se realiza la primera diferencia para llevar la serie a la estacionaridad, si la primera no es suficiente se puede considerar diferenciación de segundo orden, hasta conseguir un valor p &gt; 0.05</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_diff1</span> <span class="o">=</span> <span class="n">BTC_df</span><span class="p">[</span><span class="s2">&quot;close&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span> <span class="c1"># Se utiliza para calcular la diferencia de una serie con su valor previo,  el primer elemento de la serie resultante siempre será NaN porque no hay un elemento anterior del cual restarlo.</span>
+
+<span class="n">result_diff1</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">data_diff1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ADF Statistic:&#39;</span><span class="p">,</span> <span class="n">result_diff1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p-value:&#39;</span><span class="p">,</span> <span class="n">result_diff1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ADF Statistic: -8.169810609208525
+p-value: 8.683833628506592e-13
+</pre></div>
+</div>
+</div>
+</div>
+<p>El valor p es menor que 0.05 por lo que no se rechaza la hipotesis nula y se concluye que la serie es estacionaria, lo que significa que tiene propiedas estacionarias y la la media y la varianza no varían con el tiempo, lo que lo hace más predecible.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">forecast_accuracy</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span> <span class="n">actual</span><span class="p">):</span>
+    <span class="n">mape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">forecast</span> <span class="o">-</span> <span class="n">actual</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">actual</span><span class="p">))</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">forecast</span> <span class="o">-</span> <span class="n">actual</span><span class="p">))</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">forecast</span><span class="p">))</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">forecast</span><span class="p">)</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">forecast</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span> <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="n">mae</span><span class="p">,</span> <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span> <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="n">mse</span><span class="p">,</span> <span class="s1">&#39;R2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="repita-todos-los-pasos-indicados-en-esta-seccion-para-encontrar-modelos-arima-para-predecir-el-precio-de-bitcoin-con-los-siguientes-horizontes-7-14-21-y-28-dias-utilizar-siempre-predicciones-usando-rolling-con-ventana-de-prediccion-continua-de-un-dia-cualquier-cantidad-de-pasos-extra-para-enriquecer-su-analisis-predictivo-seran-aceptados-siempre-y-cuando-sean-acordes-con-lo-que-indica-la-teoria-de-analisis-de-series-de-tiempo">
+<h2>2. Repita TODOS los pasos indicados en esta sección para encontrar modelos ARIMA para predecir el precio de Bitcoin con los siguientes horizontes: 7, 14, 21 y 28 días. Utilizar siempre predicciones usando rolling con ventana de predicción continua de un día. Cualquier cantidad de pasos extra para enriquecer su análisis predictivo serán aceptados siempre y cuando sean acordes con lo que indica la teoría de análisis de series de tiempo.<a class="headerlink" href="#repita-todos-los-pasos-indicados-en-esta-seccion-para-encontrar-modelos-arima-para-predecir-el-precio-de-bitcoin-con-los-siguientes-horizontes-7-14-21-y-28-dias-utilizar-siempre-predicciones-usando-rolling-con-ventana-de-prediccion-continua-de-un-dia-cualquier-cantidad-de-pasos-extra-para-enriquecer-su-analisis-predictivo-seran-aceptados-siempre-y-cuando-sean-acordes-con-lo-que-indica-la-teoria-de-analisis-de-series-de-tiempo" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_BTC</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">BTC_df</span><span class="o">.</span><span class="n">close</span><span class="p">);</span> <span class="n">n_test</span> <span class="o">=</span> <span class="mi">28</span>
+<span class="n">train_size</span> <span class="o">=</span> <span class="n">n_BTC</span> <span class="o">-</span> <span class="n">n_test</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">BTC_df</span><span class="o">.</span><span class="n">close</span><span class="p">[:</span><span class="n">train_size</span><span class="p">]</span>
+<span class="n">dates_train</span> <span class="o">=</span> <span class="n">BTC_df</span><span class="o">.</span><span class="n">date</span><span class="p">[:</span><span class="n">train_size</span><span class="p">]</span>
+<span class="n">test_4w</span> <span class="o">=</span> <span class="n">BTC_df</span><span class="o">.</span><span class="n">close</span><span class="p">[</span><span class="n">train_size</span><span class="p">:</span><span class="n">train_size</span> <span class="o">+</span> <span class="n">n_test</span><span class="p">]</span> 
+<span class="n">dates_4w</span> <span class="o">=</span> <span class="n">BTC_df</span><span class="o">.</span><span class="n">date</span><span class="p">[</span><span class="n">train_size</span><span class="p">:</span><span class="n">train_size</span> <span class="o">+</span> <span class="n">n_test</span><span class="p">]</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;train:&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test_4w:&quot;</span><span class="p">,</span> <span class="n">test_4w</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>train: (472,)
+test_4w: (28,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_aic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+<span class="n">best_bic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+<span class="n">best_order</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">best_mdl</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">pq_rng</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">d_rng</span>  <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pq_rng</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">d_rng</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">pq_rng</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># print(i, d, j)</span>
+                <span class="n">tmp_mdl</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">j</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+                <span class="n">tmp_aic</span> <span class="o">=</span> <span class="n">tmp_mdl</span><span class="o">.</span><span class="n">aic</span>
+                <span class="k">if</span> <span class="n">tmp_aic</span> <span class="o">&lt;</span> <span class="n">best_aic</span><span class="p">:</span>
+                    <span class="n">best_aic</span> <span class="o">=</span> <span class="n">tmp_aic</span>
+                    <span class="n">best_order</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+                    <span class="n">best_mdl</span> <span class="o">=</span> <span class="n">tmp_mdl</span>
+            <span class="k">except</span><span class="p">:</span> <span class="k">continue</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_order</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_order</span> <span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Rolling forecasting  para predecir cifras futuras de forma continua durante un periodo de tiempo, este caso se utilizaran los periodos 7, 14,21 y 28 días.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rolling_arima_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">residualsro</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">horizon</span> <span class="ow">in</span> <span class="n">horizons</span><span class="p">:</span>
+        <span class="n">history</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[:</span><span class="o">-</span><span class="n">horizon</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>  <span class="c1"># Asegúrate de que close_prices es una lista</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[</span><span class="o">-</span><span class="n">horizon</span><span class="p">:]</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)):</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">best_order</span><span class="p">)</span>
+            <span class="n">model_fit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+            <span class="n">yhat</span> <span class="o">=</span> <span class="n">model_fit</span><span class="o">.</span><span class="n">forecast</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yhat</span><span class="p">)</span>
+            <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>  <span class="c1"># Usar .iloc[t] para acceso posicional seguro en Pandas</span>
+            
+        <span class="n">residualsro</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">forecast_accuracy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">predictions</span><span class="p">),</span> <span class="n">test</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">horizon</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Forecast&#39;</span><span class="p">:</span> <span class="n">predictions</span><span class="p">,</span> <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">residualsro</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Horizontes de pronóstico</span>
+<span class="n">horizons</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>
+
+<span class="c1"># Ejecutar el modelo ARIMA para cada horizonte y evaluar</span>
+<span class="n">rolling_results</span><span class="p">,</span> <span class="n">rolling_residuals</span> <span class="o">=</span> <span class="n">rolling_arima_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">)</span>  <span class="c1"># Desempaquetar correctamente</span>
+
+<span class="c1"># Mostrar los resultados</span>
+<span class="k">for</span> <span class="n">horizon</span><span class="p">,</span> <span class="n">acc</span> <span class="ow">in</span> <span class="n">rolling_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy for Horizon </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s2"> days:</span><span class="se">\n</span><span class="si">{</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Acceder solo al diccionario de accuracy</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for Horizon 7 days:
+{&#39;MAPE&#39;: 0.011417750876158194, &#39;MAE&#39;: 4.519749198457995, &#39;RMSE&#39;: 6.233772925982728, &#39;MSE&#39;: 38.859924892715256, &#39;R2&#39;: 0.3395270814233109}
+
+Accuracy for Horizon 14 days:
+{&#39;MAPE&#39;: 0.030802313966989826, &#39;MAE&#39;: 12.152123726538864, &#39;RMSE&#39;: 16.63517903679374, &#39;MSE&#39;: 276.7291815861819, &#39;R2&#39;: -1.0002891901266557}
+
+Accuracy for Horizon 21 days:
+{&#39;MAPE&#39;: 0.032093766971680475, &#39;MAE&#39;: 12.536542388478546, &#39;RMSE&#39;: 19.86929673042893, &#39;MSE&#39;: 394.78895256183375, &#39;R2&#39;: 0.4101277173792033}
+
+Accuracy for Horizon 28 days:
+{&#39;MAPE&#39;: 0.028356192820891392, &#39;MAE&#39;: 11.32265080943061, &#39;RMSE&#39;: 18.136203228786407, &#39;MSE&#39;: 328.92186755584254, &#39;R2&#39;: 0.5634221942217544}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="repita-el-paso-2-ahora-sin-utilizar-rolling-forecast-esto-es-realice-el-pronostico-solo-utilizando-forecast-para-los-diferentes-horizontes-de-prediccion-7-14-21-y-28-dias">
+<h2>3. Repita el paso 2 ahora sin utilizar <span style ="color:Steelblue">Rolling Forecast</span>. Esto es, realice el pronóstico solo utilizando forecast() para los diferentes horizontes de predicción, 7, 14, 21 y 28 días.<a class="headerlink" href="#repita-el-paso-2-ahora-sin-utilizar-rolling-forecast-esto-es-realice-el-pronostico-solo-utilizando-forecast-para-los-diferentes-horizontes-de-prediccion-7-14-21-y-28-dias" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">arima_direct_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">residuals_di</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List to store residuals</span>
+    <span class="k">for</span> <span class="n">horizon</span> <span class="ow">in</span> <span class="n">horizons</span><span class="p">:</span>
+        <span class="n">train</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[:</span><span class="o">-</span><span class="n">horizon</span><span class="p">]</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[</span><span class="o">-</span><span class="n">horizon</span><span class="p">:]</span>
+
+        <span class="n">model_fit</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">best_order</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+        <span class="n">forecasted_values</span> <span class="o">=</span> <span class="n">model_fit</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">horizon</span><span class="p">)</span>
+        <span class="n">residuals_di</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">forecasted_values</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">forecast_accuracy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">forecasted_values</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">horizon</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Forecast&#39;</span><span class="p">:</span> <span class="n">forecasted_values</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">residuals_di</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Horizontes de pronóstico</span>
+<span class="n">horizons</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>
+
+<span class="c1"># Ejecutar el modelo ARIMA para cada horizonte y evaluar</span>
+<span class="n">direct_results</span><span class="p">,</span> <span class="n">direct_residuals</span> <span class="o">=</span> <span class="n">arima_direct_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">)</span>  <span class="c1"># Correct unpacking</span>
+
+<span class="c1"># Mostrar los resultados</span>
+<span class="k">for</span> <span class="n">horizon</span><span class="p">,</span> <span class="n">acc</span> <span class="ow">in</span> <span class="n">direct_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy for Horizon </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s2"> days:</span><span class="se">\n</span><span class="si">{</span><span class="n">acc</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for Horizon 7 days:
+{&#39;Forecast&#39;: [388.7909562815056, 389.97107992684016, 381.4461079949002, 387.1827386217561, 394.9233128254891, 382.2036292823555, 382.6652742970522], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.012585652271631336, &#39;MAE&#39;: 4.9578063105097625, &#39;RMSE&#39;: 6.707357760444587, &#39;MSE&#39;: 44.98864812659623, &#39;R2&#39;: 0.23536178175776912}}
+
+Accuracy for Horizon 14 days:
+{&#39;Forecast&#39;: [359.8120314146245, 370.32678714685284, 366.29199762619527, 366.16558589506593, 370.98860198247314, 363.43478939448244, 362.4323793511202, 371.07558765247916, 370.29137925050054, 364.33028064970006, 366.0514546418868, 370.787260083209, 368.6152490235519, 367.00585055091517], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.06157581637240981, &#39;MAE&#39;: 24.40020010498254, &#39;RMSE&#39;: 27.004049516535307, &#39;MSE&#39;: 729.2186902914907, &#39;R2&#39;: -4.271031609559828}}
+
+Accuracy for Horizon 21 days:
+{&#39;Forecast&#39;: [446.9730809203975, 451.8819259921309, 453.87224584476974, 452.23234787470847, 456.11031188104164, 457.1918674915738, 455.77556572178463, 457.0919947335701, 461.1314951585409, 460.9444580535485, 460.2182313487434, 462.3814997357106, 464.7325083186686, 464.7244381725478, 465.4403443170084, 467.18062863464684, 468.2758306102014, 468.9830271432662, 470.3997044974288, 471.54250542874377, 472.28927949153064], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.1471853208913676, &#39;MAE&#39;: 57.367099115907834, &#39;RMSE&#39;: 65.09073283340784, &#39;MSE&#39;: 4236.803500790078, &#39;R2&#39;: -5.330402448724532}}
+
+Accuracy for Horizon 28 days:
+{&#39;Forecast&#39;: [438.31045772853895, 438.68735336370946, 439.85781220300674, 437.51478131723263, 441.6361918334554, 443.1209355445808, 444.2775363854957, 442.35212543375036, 446.1471434280536, 446.80398149589803, 448.4603986192307, 447.4295078932484, 450.6004098054712, 450.566415494776, 452.77400129752175, 452.2605424354567, 454.94089212947523, 454.6274140794693, 457.15359700778254, 456.8126070311225, 459.26109556448495, 458.9108482300561, 461.5228933579398, 461.2083323101411, 463.60627861436956, 463.28986077532704, 465.8659909497858, 465.55516606139236], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.10526133329815436, &#39;MAE&#39;: 41.21229018152836, &#39;RMSE&#39;: 51.92213368841914, &#39;MSE&#39;: 2695.9079667580695, &#39;R2&#39;: -2.578277094962406}}
+</pre></div>
+</div>
+</div>
+</div>
+<p>4.Realice tablas de error para los ítems 1 y 2, utilizando las métricas: MAPE, MAE, RMSE, MSE, R2. Además, agregue el gráfico de correlación entre la observación real y su predicción en el test.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="c1"># Asumiendo que tienes &#39;rolling_results&#39; y &#39;direct_results&#39; bien definidos como se discutió anteriormente</span>
+<span class="c1"># Crear DataFrames para almacenar resultados</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MAPE&#39;</span><span class="p">,</span> <span class="s1">&#39;MAE&#39;</span><span class="p">,</span> <span class="s1">&#39;RMSE&#39;</span><span class="p">,</span> <span class="s1">&#39;MSE&#39;</span><span class="p">,</span> <span class="s1">&#39;R2&#39;</span><span class="p">]</span>
+<span class="n">rolling_metrics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">horizons</span><span class="p">)</span>
+<span class="n">direct_metrics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">horizons</span><span class="p">)</span>
+
+<span class="c1"># Llenar DataFrames con resultados</span>
+<span class="k">for</span> <span class="n">horizon</span> <span class="ow">in</span> <span class="n">horizons</span><span class="p">:</span>
+    <span class="n">rolling_metrics</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">horizon</span><span class="p">]</span> <span class="o">=</span> <span class="n">rolling_results</span><span class="p">[</span><span class="n">horizon</span><span class="p">][</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">]</span>
+    <span class="n">direct_metrics</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">horizon</span><span class="p">]</span> <span class="o">=</span> <span class="n">direct_results</span><span class="p">[</span><span class="n">horizon</span><span class="p">][</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">]</span>
+
+<span class="c1"># Unir ambos DataFrames para comparación</span>
+<span class="n">combined_metrics</span> <span class="o">=</span> <span class="n">rolling_metrics</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">direct_metrics</span><span class="p">,</span> <span class="n">lsuffix</span><span class="o">=</span><span class="s1">&#39;_rolling&#39;</span><span class="p">,</span> <span class="n">rsuffix</span><span class="o">=</span><span class="s1">&#39;_direct&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Combined Metrics for Rolling vs Direct Forecast:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">combined_metrics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Combined Metrics for Rolling vs Direct Forecast:
+   MAPE_rolling MAE_rolling RMSE_rolling MSE_rolling R2_rolling MAPE_direct  \
+7      0.011418    4.519749     6.233773   38.859925   0.339527    0.012586   
+14     0.030802   12.152124    16.635179  276.729182  -1.000289    0.061576   
+21     0.032094   12.536542    19.869297  394.788953   0.410128    0.147185   
+28     0.028356   11.322651    18.136203  328.921868   0.563422    0.105261   
+
+   MAE_direct RMSE_direct   MSE_direct R2_direct  
+7    4.957806    6.707358    44.988648  0.235362  
+14    24.4002    27.00405    729.21869 -4.271032  
+21  57.367099   65.090733  4236.803501 -5.330402  
+28   41.21229   51.922134  2695.907967 -2.578277  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_combined_correlations</span><span class="p">(</span><span class="n">rolling_predictions</span><span class="p">,</span> <span class="n">direct_predictions</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">horizon</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">actual</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">rolling_predictions</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Rolling Forecast&#39;</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">actual</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">direct_predictions</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Direct Forecast&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Combined Forecast Correlation for </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s1"> Days&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Actual Values&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted Values&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Ejecutar gráficos de correlación combinados para cada horizonte</span>
+<span class="k">for</span> <span class="n">horizon</span> <span class="ow">in</span> <span class="n">horizons</span><span class="p">:</span>
+    <span class="n">plot_combined_correlations</span><span class="p">(</span>
+        <span class="n">rolling_predictions</span><span class="o">=</span><span class="n">rolling_results</span><span class="p">[</span><span class="n">horizon</span><span class="p">][</span><span class="s1">&#39;Forecast&#39;</span><span class="p">],</span>
+        <span class="n">direct_predictions</span><span class="o">=</span><span class="n">direct_results</span><span class="p">[</span><span class="n">horizon</span><span class="p">][</span><span class="s1">&#39;Forecast&#39;</span><span class="p">],</span>
+        <span class="n">actual</span><span class="o">=</span><span class="n">close_prices</span><span class="p">[</span><span class="o">-</span><span class="n">horizon</span><span class="p">:],</span>
+        <span class="n">horizon</span><span class="o">=</span><span class="n">horizon</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5201fbbb866c97456bcef620d234b9ac21775d10f4b1ca8533f697ea001ba5b4.png" src="_images/5201fbbb866c97456bcef620d234b9ac21775d10f4b1ca8533f697ea001ba5b4.png" />
+<img alt="_images/eee6b51b6a3a3bb2e9d009dde52c9bc605ec2409c538e32220863c3cbe2a036c.png" src="_images/eee6b51b6a3a3bb2e9d009dde52c9bc605ec2409c538e32220863c3cbe2a036c.png" />
+<img alt="_images/9588e032a277954631f1ecd2e3e3badcb6386fe386ac401d0e7a7398fe4e7025.png" src="_images/9588e032a277954631f1ecd2e3e3badcb6386fe386ac401d0e7a7398fe4e7025.png" />
+<img alt="_images/da51dd26a2cddd3b885493dd3e50d52d34398703af69d0e16bf77c4fda1a057f.png" src="_images/da51dd26a2cddd3b885493dd3e50d52d34398703af69d0e16bf77c4fda1a057f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="k">def</span> <span class="nf">plot_correlations</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">actual</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">predictions</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Actual Values&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted Values&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Supongamos que tienes acceso a los últimos valores reales y predichos de ambos métodos</span>
+<span class="k">for</span> <span class="n">horizon</span> <span class="ow">in</span> <span class="n">horizons</span><span class="p">:</span>
+    <span class="n">actual_values</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[</span><span class="o">-</span><span class="n">horizon</span><span class="p">:]</span>  <span class="c1"># Esto asume que &#39;close_prices&#39; es la serie de precios de cierre</span>
+    <span class="n">plot_correlations</span><span class="p">(</span><span class="n">rolling_results</span><span class="p">[</span><span class="n">horizon</span><span class="p">][</span><span class="s1">&#39;Forecast&#39;</span><span class="p">],</span> <span class="n">actual_values</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Rolling Forecast Correlation for </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s1"> Days&#39;</span><span class="p">)</span>
+    <span class="n">plot_correlations</span><span class="p">(</span><span class="n">direct_results</span><span class="p">[</span><span class="n">horizon</span><span class="p">][</span><span class="s1">&#39;Forecast&#39;</span><span class="p">],</span> <span class="n">actual_values</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Direct Forecast Correlation for </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s1"> Days&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/93b26201905ecbc626c6cb8a649382dafe6955c10b7ca335a0af478fd2b2bf20.png" src="_images/93b26201905ecbc626c6cb8a649382dafe6955c10b7ca335a0af478fd2b2bf20.png" />
+<img alt="_images/a5cbcec4944478734a3303857f345b76cbc009f791c626cc2b032edcc4870beb.png" src="_images/a5cbcec4944478734a3303857f345b76cbc009f791c626cc2b032edcc4870beb.png" />
+<img alt="_images/4c2ae0bb8178628bf3d3a18cb070897f4e9c64dafaadaeffd09683888d6d1dca.png" src="_images/4c2ae0bb8178628bf3d3a18cb070897f4e9c64dafaadaeffd09683888d6d1dca.png" />
+<img alt="_images/a85ccfa2beb04d6eb0d2fcba744c32f1a4ed58186e24eb0f9eb41a117afdea0c.png" src="_images/a85ccfa2beb04d6eb0d2fcba744c32f1a4ed58186e24eb0f9eb41a117afdea0c.png" />
+<img alt="_images/0d7ade1e84b1ce907fdcd62d342f3c3f3dcdd486c65730e954fc7d23252fe0cd.png" src="_images/0d7ade1e84b1ce907fdcd62d342f3c3f3dcdd486c65730e954fc7d23252fe0cd.png" />
+<img alt="_images/a566918f8ef235f4eca7c6cb0b5913e0374f9a5c3fa36ea9e425ef8610ef4111.png" src="_images/a566918f8ef235f4eca7c6cb0b5913e0374f9a5c3fa36ea9e425ef8610ef4111.png" />
+<img alt="_images/efd01250e7625afe5b256c8ef9a30ba9c7112a18564077370ef68d2228794a6b.png" src="_images/efd01250e7625afe5b256c8ef9a30ba9c7112a18564077370ef68d2228794a6b.png" />
+<img alt="_images/6f1eb6ba3b396ce03dce84226e9359a9d3f823da07ae6021b4f0ce78c2c6d8c5.png" src="_images/6f1eb6ba3b396ce03dce84226e9359a9d3f823da07ae6021b4f0ce78c2c6d8c5.png" />
+</div>
+</div>
+<p>5.Repita el análisis desarrollado en los pasos anteriores, considerando ahora el criterio de inferencia Bayesiana (BIC) y el criterio de información de Hannan–Quinn (HQIC) para encontrar el mejor modelo ARIMA y, compare los errores con aquellos obtenidos con el criterio de Akaike.</p>
+<p>Criterio BIC</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_bic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>  <span class="c1"># Mejor BIC inicializado a infinito</span>
+<span class="n">best_order_bic</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Mejor orden inicialmente a None</span>
+<span class="n">best_mdl_bic</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Mejor modelo inicialmente a None</span>
+
+<span class="n">pq_rng</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>  <span class="c1"># Rango para los parámetros p y q</span>
+<span class="n">d_rng</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>   <span class="c1"># Rango para el parámetro d</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pq_rng</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">d_rng</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">pq_rng</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Ajustar el modelo ARIMA con la orden (i, d, j)</span>
+                <span class="n">tmp_mdl</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+                <span class="n">tmp_bic</span> <span class="o">=</span> <span class="n">tmp_mdl</span><span class="o">.</span><span class="n">bic</span>  <span class="c1"># Obtener el BIC del modelo temporal</span>
+
+                <span class="c1"># Verificar si el BIC actual es el mejor encontrado hasta ahora</span>
+                <span class="k">if</span> <span class="n">tmp_bic</span> <span class="o">&lt;</span> <span class="n">best_bic</span><span class="p">:</span>
+                    <span class="n">best_bic</span> <span class="o">=</span> <span class="n">tmp_bic</span>  <span class="c1"># Actualizar el mejor BIC</span>
+                    <span class="n">best_order_bic</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>  <span class="c1"># Guardar la mejor orden</span>
+                    <span class="n">best_mdl_bic</span> <span class="o">=</span> <span class="n">tmp_mdl</span>  <span class="c1"># Guardar el mejor modelo</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">continue</span>  
+
+<span class="c1"># Después del ciclo, best_order_bic y best_mdl_bic contienen la mejor orden y modelo basados en BIC</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mejor BIC:&quot;</span><span class="p">,</span> <span class="n">best_bic</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mejor orden BIC:&quot;</span><span class="p">,</span> <span class="n">best_order_bic</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mejor BIC: 3577.2314509463577
+Mejor orden BIC: (0, 1, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rolling_arima_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">residualsro</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">horizon</span> <span class="ow">in</span> <span class="n">horizons</span><span class="p">:</span>
+        <span class="n">history</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[:</span><span class="o">-</span><span class="n">horizon</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>  <span class="c1"># Asegúrate de que close_prices es una lista</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[</span><span class="o">-</span><span class="n">horizon</span><span class="p">:]</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)):</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">best_order_bic</span><span class="p">)</span>
+            <span class="n">model_fit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+            <span class="n">yhat</span> <span class="o">=</span> <span class="n">model_fit</span><span class="o">.</span><span class="n">forecast</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yhat</span><span class="p">)</span>
+            <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>  <span class="c1"># Usar .iloc[t] para acceso posicional seguro en Pandas</span>
+            
+        <span class="n">residualsro</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">forecast_accuracy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">predictions</span><span class="p">),</span> <span class="n">test</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">horizon</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Forecast&#39;</span><span class="p">:</span> <span class="n">predictions</span><span class="p">,</span> <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">residualsro</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Horizontes de pronóstico</span>
+<span class="n">horizons</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>
+
+<span class="c1"># Ejecutar el modelo ARIMA para cada horizonte y evaluar</span>
+<span class="n">rolling_results</span><span class="p">,</span> <span class="n">rolling_residuals</span> <span class="o">=</span> <span class="n">rolling_arima_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">)</span>  <span class="c1"># Desempaquetar correctamente</span>
+
+<span class="c1"># Mostrar los resultados</span>
+<span class="k">for</span> <span class="n">horizon</span><span class="p">,</span> <span class="n">acc</span> <span class="ow">in</span> <span class="n">rolling_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy for Horizon </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s2"> days:</span><span class="se">\n</span><span class="si">{</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Acceder solo al diccionario de accuracy</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for Horizon 7 days:
+{&#39;MAPE&#39;: 0.011417750876158194, &#39;MAE&#39;: 4.519749198457995, &#39;RMSE&#39;: 6.233772925982728, &#39;MSE&#39;: 38.859924892715256, &#39;R2&#39;: 0.3395270814233109}
+
+Accuracy for Horizon 14 days:
+{&#39;MAPE&#39;: 0.030802313966989826, &#39;MAE&#39;: 12.152123726538864, &#39;RMSE&#39;: 16.63517903679374, &#39;MSE&#39;: 276.7291815861819, &#39;R2&#39;: -1.0002891901266557}
+
+Accuracy for Horizon 21 days:
+{&#39;MAPE&#39;: 0.032093766971680475, &#39;MAE&#39;: 12.536542388478546, &#39;RMSE&#39;: 19.86929673042893, &#39;MSE&#39;: 394.78895256183375, &#39;R2&#39;: 0.4101277173792033}
+
+Accuracy for Horizon 28 days:
+{&#39;MAPE&#39;: 0.028356192820891392, &#39;MAE&#39;: 11.32265080943061, &#39;RMSE&#39;: 18.136203228786407, &#39;MSE&#39;: 328.92186755584254, &#39;R2&#39;: 0.5634221942217544}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">arima_direct_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">residuals_di</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List to store residuals</span>
+    <span class="k">for</span> <span class="n">horizon</span> <span class="ow">in</span> <span class="n">horizons</span><span class="p">:</span>
+        <span class="n">train</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[:</span><span class="o">-</span><span class="n">horizon</span><span class="p">]</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[</span><span class="o">-</span><span class="n">horizon</span><span class="p">:]</span>
+
+        <span class="n">model_fit</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">best_order_bic</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+        <span class="n">forecasted_values</span> <span class="o">=</span> <span class="n">model_fit</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">horizon</span><span class="p">)</span>
+        <span class="n">residuals_di</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">forecasted_values</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">forecast_accuracy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">forecasted_values</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">horizon</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Forecast&#39;</span><span class="p">:</span> <span class="n">forecasted_values</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">residuals_di</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Horizontes de pronóstico</span>
+<span class="n">horizons</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>
+
+<span class="c1"># Ejecutar el modelo ARIMA para cada horizonte y evaluar</span>
+<span class="n">direct_results</span><span class="p">,</span> <span class="n">direct_residuals</span> <span class="o">=</span> <span class="n">arima_direct_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">)</span>  <span class="c1"># Correct unpacking</span>
+
+<span class="c1"># Mostrar los resultados</span>
+<span class="k">for</span> <span class="n">horizon</span><span class="p">,</span> <span class="n">acc</span> <span class="ow">in</span> <span class="n">direct_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy for Horizon </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s2"> days:</span><span class="se">\n</span><span class="si">{</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Acceder solo al diccionario de accuracy</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for Horizon 7 days:
+{&#39;Forecast&#39;: [383.3399906454841, 386.1343439523389, 386.1343439523389, 386.1343439523389, 386.1343439523389, 386.1343439523389, 386.1343439523389], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.0196305321519561, &#39;MAE&#39;: 7.705905680055001, &#39;RMSE&#39;: 8.658830427490132, &#39;MSE&#39;: 74.97534437202894, &#39;R2&#39;: -0.27429954266250345}}
+
+Accuracy for Horizon 14 days:
+{&#39;Forecast&#39;: [358.8845238950348, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.05956175570601651, &#39;MAE&#39;: 23.62625239034883, &#39;RMSE&#39;: 26.40747710414675, &#39;MSE&#39;: 697.3548470060348, &#39;R2&#39;: -4.04070931064486}}
+
+Accuracy for Horizon 21 days:
+{&#39;Forecast&#39;: [448.3480253583249, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.11659644773345461, &#39;MAE&#39;: 45.315626494504826, &#39;RMSE&#39;: 52.22503021675011, &#39;MSE&#39;: 2727.4537811404625, &#39;R2&#39;: -3.0752138001431577}}
+
+Accuracy for Horizon 28 days:
+{&#39;Forecast&#39;: [433.5546190693511, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.06906659030932318, &#39;MAE&#39;: 27.134722241878666, &#39;RMSE&#39;: 34.31707166878355, &#39;MSE&#39;: 1177.6614079204264, &#39;R2&#39;: -0.5631093099406996}}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Criterio HQIC</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.arima.model</span> <span class="kn">import</span> <span class="n">ARIMA</span>
+
+<span class="n">best_hqic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>  <span class="c1"># Mejor HQIC inicializado a infinito</span>
+<span class="n">best_order_hqic</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Mejor orden inicialmente a None</span>
+<span class="n">best_mdl_hqic</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Mejor modelo inicialmente a None</span>
+
+<span class="n">pq_rng</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>  <span class="c1"># Rango para los parámetros p y q</span>
+<span class="n">d_rng</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>   <span class="c1"># Rango para el parámetro d</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pq_rng</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">d_rng</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">pq_rng</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Ajustar el modelo ARIMA con la orden (i, d, j)</span>
+                <span class="n">tmp_mdl</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+                <span class="n">tmp_hqic</span> <span class="o">=</span> <span class="n">tmp_mdl</span><span class="o">.</span><span class="n">hqic</span>  <span class="c1"># Obtener el HQIC del modelo temporal</span>
+
+                <span class="c1"># Verificar si el HQIC actual es el mejor encontrado hasta ahora</span>
+                <span class="k">if</span> <span class="n">tmp_hqic</span> <span class="o">&lt;</span> <span class="n">best_hqic</span><span class="p">:</span>
+                    <span class="n">best_hqic</span> <span class="o">=</span> <span class="n">tmp_hqic</span>  <span class="c1"># Actualizar el mejor HQIC</span>
+                    <span class="n">best_order_hqic</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>  <span class="c1"># Guardar la mejor orden</span>
+                    <span class="n">best_mdl_hqic</span> <span class="o">=</span> <span class="n">tmp_mdl</span>  <span class="c1"># Guardar el mejor modelo</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">continue</span>  <span class="c1"># Ignorar las combinaciones de órdenes que causan errores</span>
+
+<span class="c1"># Después del ciclo, best_order_hqic y best_mdl_hqic contienen la mejor orden y modelo basados en HQIC</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mejor HQIC:&quot;</span><span class="p">,</span> <span class="n">best_hqic</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mejor orden HQIC:&quot;</span><span class="p">,</span> <span class="n">best_order_hqic</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mejor HQIC: 3567.553160291157
+Mejor orden HQIC: (4, 1, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rolling_arima_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">residualsro</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">horizon</span> <span class="ow">in</span> <span class="n">horizons</span><span class="p">:</span>
+        <span class="n">history</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[:</span><span class="o">-</span><span class="n">horizon</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>  <span class="c1"># Asegúrate de que close_prices es una lista</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[</span><span class="o">-</span><span class="n">horizon</span><span class="p">:]</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)):</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">best_order_hqic</span><span class="p">)</span>
+            <span class="n">model_fit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+            <span class="n">yhat</span> <span class="o">=</span> <span class="n">model_fit</span><span class="o">.</span><span class="n">forecast</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yhat</span><span class="p">)</span>
+            <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>  <span class="c1"># Usar .iloc[t] para acceso posicional seguro en Pandas</span>
+            
+        <span class="n">residualsro</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">forecast_accuracy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">predictions</span><span class="p">),</span> <span class="n">test</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">horizon</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Forecast&#39;</span><span class="p">:</span> <span class="n">predictions</span><span class="p">,</span> <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">residualsro</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Horizontes de pronóstico</span>
+<span class="n">horizons</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>
+
+<span class="c1"># Ejecutar el modelo ARIMA para cada horizonte y evaluar</span>
+<span class="n">rolling_results</span><span class="p">,</span> <span class="n">rolling_residuals</span> <span class="o">=</span> <span class="n">rolling_arima_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">)</span>  <span class="c1"># Desempaquetar correctamente</span>
+
+<span class="c1"># Mostrar los resultados</span>
+<span class="k">for</span> <span class="n">horizon</span><span class="p">,</span> <span class="n">acc</span> <span class="ow">in</span> <span class="n">rolling_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy for Horizon </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s2"> days:</span><span class="se">\n</span><span class="si">{</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Acceder solo al diccionario de accuracy</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for Horizon 7 days:
+{&#39;Forecast&#39;: [383.3399906454841, 386.1343439523389, 386.1343439523389, 386.1343439523389, 386.1343439523389, 386.1343439523389, 386.1343439523389], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.0196305321519561, &#39;MAE&#39;: 7.705905680055001, &#39;RMSE&#39;: 8.658830427490132, &#39;MSE&#39;: 74.97534437202894, &#39;R2&#39;: -0.27429954266250345}}
+
+Accuracy for Horizon 14 days:
+{&#39;Forecast&#39;: [358.8845238950348, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.05956175570601651, &#39;MAE&#39;: 23.62625239034883, &#39;RMSE&#39;: 26.40747710414675, &#39;MSE&#39;: 697.3548470060348, &#39;R2&#39;: -4.04070931064486}}
+
+Accuracy for Horizon 21 days:
+{&#39;Forecast&#39;: [448.3480253583249, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.11659644773345461, &#39;MAE&#39;: 45.315626494504826, &#39;RMSE&#39;: 52.22503021675011, &#39;MSE&#39;: 2727.4537811404625, &#39;R2&#39;: -3.0752138001431577}}
+
+Accuracy for Horizon 28 days:
+{&#39;Forecast&#39;: [433.5546190693511, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.06906659030932318, &#39;MAE&#39;: 27.134722241878666, &#39;RMSE&#39;: 34.31707166878355, &#39;MSE&#39;: 1177.6614079204264, &#39;R2&#39;: -0.5631093099406996}}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">arima_direct_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">residuals_di</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List to store residuals</span>
+    <span class="k">for</span> <span class="n">horizon</span> <span class="ow">in</span> <span class="n">horizons</span><span class="p">:</span>
+        <span class="n">train</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[:</span><span class="o">-</span><span class="n">horizon</span><span class="p">]</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[</span><span class="o">-</span><span class="n">horizon</span><span class="p">:]</span>
+
+        <span class="n">model_fit</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">best_order_hqic</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+        <span class="n">forecasted_values</span> <span class="o">=</span> <span class="n">model_fit</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">horizon</span><span class="p">)</span>
+        <span class="n">residuals_di</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">forecasted_values</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">forecast_accuracy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">forecasted_values</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">horizon</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Forecast&#39;</span><span class="p">:</span> <span class="n">forecasted_values</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">residuals_di</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Horizontes de pronóstico</span>
+<span class="n">horizons</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>
+
+<span class="c1"># Ejecutar el modelo ARIMA para cada horizonte y evaluar</span>
+<span class="n">direct_results</span><span class="p">,</span> <span class="n">direct_residuals</span> <span class="o">=</span> <span class="n">arima_direct_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">)</span>  <span class="c1"># Correct unpacking</span>
+
+<span class="c1"># Mostrar los resultados</span>
+<span class="k">for</span> <span class="n">horizon</span><span class="p">,</span> <span class="n">acc</span> <span class="ow">in</span> <span class="n">direct_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy for Horizon </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s2"> days:</span><span class="se">\n</span><span class="si">{</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Acceder solo al diccionario de accuracy</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for Horizon 7 days:
+{&#39;Forecast&#39;: [389.3044328744056, 387.63800554607155, 381.3629271017346, 389.5550210512024, 393.18521233982585, 384.66480134849655, 383.96395883757236], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.01481029810706285, &#39;MAE&#39;: 5.822864386182963, &#39;RMSE&#39;: 7.512205004613044, &#39;MSE&#39;: 56.43322403133326, &#39;R2&#39;: 0.040846932062547414}}
+
+Accuracy for Horizon 14 days:
+{&#39;Forecast&#39;: [360.24822517800317, 371.3229102365422, 368.63094745026893, 372.3296362803393, 376.65411810797616, 370.0694161184088, 367.2844274850963, 373.4394887878531, 374.12467353577546, 369.31527700166066, 370.18775491868547, 373.48300809476024, 371.80109408763735, 369.8770940649629], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.052291414256686486, &#39;MAE&#39;: 20.745997484631605, &#39;RMSE&#39;: 23.384405097355913, &#39;MSE&#39;: 546.8304017572452, &#39;R2&#39;: -2.9526693036057177}}
+
+Accuracy for Horizon 21 days:
+{&#39;Forecast&#39;: [447.479205090824, 449.9973950627597, 448.64809705539255, 446.8637740088647, 449.78275886189874, 450.63411505378764, 447.87663841229767, 447.89371902387296, 450.00623018327775, 449.4109124845979, 448.0070434115985, 448.8665769390704, 449.65388612294987, 448.77044106881516, 448.4515873387582, 449.21298530185044, 449.2185335562256, 448.6442677104607, 448.8163547097879, 449.19550951606885, 448.94983462104284], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.11527602927048518, &#39;MAE&#39;: 44.795400345564325, &#39;RMSE&#39;: 51.69573205835411, &#39;MSE&#39;: 2672.4487130491407, &#39;R2&#39;: -2.9930282048771435}}
+
+Accuracy for Horizon 28 days:
+{&#39;Forecast&#39;: [433.78333263512445, 434.4399352979293, 434.4060092174647, 432.89548595529124, 433.193503110392, 434.51418787548204, 434.02192398104245, 433.1076962326977, 433.69320967300536, 434.2273321685828, 433.6496123103327, 433.4079621274701, 433.9080020758886, 433.9502937628771, 433.5616255114369, 433.63832837814977, 433.9104315059795, 433.77660610320385, 433.60832044077057, 433.75628181438975, 433.84222717070054, 433.7065392621726, 433.67937729731426, 433.78942668521296, 433.77931941345406, 433.6990089458252, 433.72899206135435, 433.7813085271147], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.06967882704795476, &#39;MAE&#39;: 27.36433425745586, &#39;RMSE&#39;: 34.59555191324797, &#39;MSE&#39;: 1196.8522121822352, &#39;R2&#39;: -0.588581253408605}}
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Escriba en cada paso las conclusiones y análisis estadísticos asociados con los resultados obtenidos. Realice tests de normalidad e independencia para los residuales obtenidos para cada predicción, en cada caso agregue las correspondientes conclusiones. Figuras y algoritmos que no estén acompañados de una conclusión, descripción y análisis estadístico, no serán tenidas en cuenta.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rolling_arima_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">residuals_per_horizon</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Diccionario para almacenar residuales por horizonte</span>
+    <span class="k">for</span> <span class="n">horizon</span> <span class="ow">in</span> <span class="n">horizons</span><span class="p">:</span>
+        <span class="n">history</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[:</span><span class="o">-</span><span class="n">horizon</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>  <span class="c1"># Asegúrate de que close_prices es una lista o conviértela en lista</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[</span><span class="o">-</span><span class="n">horizon</span><span class="p">:]</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)):</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">best_order</span><span class="p">)</span>
+            <span class="n">model_fit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+            <span class="n">yhat</span> <span class="o">=</span> <span class="n">model_fit</span><span class="o">.</span><span class="n">forecast</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yhat</span><span class="p">)</span>
+            <span class="c1"># Corregido para usar .iloc[t] asegurando acceso por posición</span>
+            <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>  <span class="c1"># Acceso seguro por posición</span>
+        
+        <span class="n">residuals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+        <span class="n">residuals_per_horizon</span><span class="p">[</span><span class="n">horizon</span><span class="p">]</span> <span class="o">=</span> <span class="n">residuals</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">forecast_accuracy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">predictions</span><span class="p">),</span> <span class="n">test</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">horizon</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Forecast&#39;</span><span class="p">:</span> <span class="n">predictions</span><span class="p">,</span> <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">residuals_per_horizon</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ejecutar el modelo ARIMA para cada horizonte y evaluar</span>
+<span class="n">rolling_results</span><span class="p">,</span> <span class="n">rolling_residuals</span> <span class="o">=</span> <span class="n">rolling_arima_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">)</span>  <span class="c1"># Desempaquetar correctamente</span>
+
+<span class="c1"># Mostrar los resultados</span>
+<span class="k">for</span> <span class="n">horizon</span><span class="p">,</span> <span class="n">acc</span> <span class="ow">in</span> <span class="n">rolling_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy for Horizon </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s2"> days:</span><span class="se">\n</span><span class="si">{</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Acceder solo al diccionario de accuracy</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for Horizon 7 days:
+{&#39;MAPE&#39;: 0.011417750876158194, &#39;MAE&#39;: 4.519749198457995, &#39;RMSE&#39;: 6.233772925982728, &#39;MSE&#39;: 38.859924892715256, &#39;R2&#39;: 0.3395270814233109}
+
+Accuracy for Horizon 14 days:
+{&#39;MAPE&#39;: 0.030802313966989826, &#39;MAE&#39;: 12.152123726538864, &#39;RMSE&#39;: 16.63517903679374, &#39;MSE&#39;: 276.7291815861819, &#39;R2&#39;: -1.0002891901266557}
+
+Accuracy for Horizon 21 days:
+{&#39;MAPE&#39;: 0.032093766971680475, &#39;MAE&#39;: 12.536542388478546, &#39;RMSE&#39;: 19.86929673042893, &#39;MSE&#39;: 394.78895256183375, &#39;R2&#39;: 0.4101277173792033}
+
+Accuracy for Horizon 28 days:
+{&#39;MAPE&#39;: 0.028356192820891392, &#39;MAE&#39;: 11.32265080943061, &#39;RMSE&#39;: 18.136203228786407, &#39;MSE&#39;: 328.92186755584254, &#39;R2&#39;: 0.5634221942217544}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">shapiro</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.stattools</span> <span class="kn">import</span> <span class="n">durbin_watson</span>
+
+<span class="c1"># Asumiendo que rolling_residuals es un diccionario que contiene los residuales por cada horizonte</span>
+<span class="c1"># Ejecutar pruebas para cada conjunto de residuales asociados a cada horizonte</span>
+
+<span class="k">for</span> <span class="n">horizon</span><span class="p">,</span> <span class="n">residuals</span> <span class="ow">in</span> <span class="n">rolling_residuals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Resultados de las pruebas para el horizonte de </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s2"> días:&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Test de normalidad (Shapiro-Wilk)</span>
+    <span class="k">if</span> <span class="n">residuals</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Verificar que haya residuales</span>
+        <span class="n">shapiro_test_statistic</span><span class="p">,</span> <span class="n">shapiro_p_value</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shapiro-Wilk Test Statistic: </span><span class="si">{</span><span class="n">shapiro_test_statistic</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, p-value: </span><span class="si">{</span><span class="n">shapiro_p_value</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">shapiro_p_value</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Los residuales siguen una distribución normal.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Los residuales no siguen una distribución normal.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Test de independencia (Durbin-Watson)</span>
+        <span class="n">durbin_watson_statistic</span> <span class="o">=</span> <span class="n">durbin_watson</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Durbin-Watson Statistic: </span><span class="si">{</span><span class="n">durbin_watson_statistic</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">durbin_watson_statistic</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">durbin_watson_statistic</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Los residuales muestran autocorrelación.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Los residuales son independientes.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No hay residuales disponibles para analizar.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resultados de las pruebas para el horizonte de 7 días:
+Shapiro-Wilk Test Statistic: 0.676, p-value: 0.002
+Los residuales no siguen una distribución normal.
+Durbin-Watson Statistic: 2.134
+Los residuales son independientes.
+
+Resultados de las pruebas para el horizonte de 14 días:
+Shapiro-Wilk Test Statistic: 0.925, p-value: 0.259
+Los residuales siguen una distribución normal.
+Durbin-Watson Statistic: 2.461
+Los residuales son independientes.
+
+Resultados de las pruebas para el horizonte de 21 días:
+Shapiro-Wilk Test Statistic: 0.851, p-value: 0.004
+Los residuales no siguen una distribución normal.
+Durbin-Watson Statistic: 2.653
+Los residuales son independientes.
+
+Resultados de las pruebas para el horizonte de 28 días:
+Shapiro-Wilk Test Statistic: 0.831, p-value: 0.000
+Los residuales no siguen una distribución normal.
+Durbin-Watson Statistic: 2.674
+Los residuales son independientes.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">arima_direct_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">residuals_per_horizon</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Diccionario para almacenar residuales por horizonte</span>
+
+    <span class="k">for</span> <span class="n">horizon</span> <span class="ow">in</span> <span class="n">horizons</span><span class="p">:</span>
+        <span class="n">train</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[:</span><span class="o">-</span><span class="n">horizon</span><span class="p">]</span>  <span class="c1"># Datos de entrenamiento</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[</span><span class="o">-</span><span class="n">horizon</span><span class="p">:]</span>   <span class="c1"># Datos de prueba</span>
+        <span class="n">model_fit</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">best_order</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+        <span class="n">forecasted_values</span> <span class="o">=</span> <span class="n">model_fit</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">horizon</span><span class="p">)</span>
+
+        <span class="c1"># Calcula residuales como diferencia entre pronósticos y valores reales</span>
+        <span class="n">residuals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">forecasted_values</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+        <span class="n">residuals_per_horizon</span><span class="p">[</span><span class="n">horizon</span><span class="p">]</span> <span class="o">=</span> <span class="n">residuals</span>
+
+        <span class="c1"># Calcular y almacenar precisión de los pronósticos</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">forecast_accuracy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">forecasted_values</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">horizon</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Forecast&#39;</span><span class="p">:</span> <span class="n">forecasted_values</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">residuals_per_horizon</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Horizontes de pronóstico</span>
+<span class="n">horizons</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>
+
+<span class="c1"># Ejecutar el modelo ARIMA para cada horizonte y evaluar</span>
+<span class="n">direct_results</span><span class="p">,</span> <span class="n">direct_residuals</span> <span class="o">=</span> <span class="n">arima_direct_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">)</span>  <span class="c1"># Desempaquetar correctamente</span>
+
+<span class="c1"># Mostrar los resultados</span>
+<span class="k">for</span> <span class="n">horizon</span><span class="p">,</span> <span class="n">acc</span> <span class="ow">in</span> <span class="n">direct_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy for Horizon </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s2"> days:</span><span class="se">\n</span><span class="si">{</span><span class="n">acc</span><span class="p">[</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for Horizon 7 days:
+{&#39;MAPE&#39;: 0.012585652271631336, &#39;MAE&#39;: 4.9578063105097625, &#39;RMSE&#39;: 6.707357760444587, &#39;MSE&#39;: 44.98864812659623, &#39;R2&#39;: 0.23536178175776912}
+
+Accuracy for Horizon 14 days:
+{&#39;MAPE&#39;: 0.06157581637240981, &#39;MAE&#39;: 24.40020010498254, &#39;RMSE&#39;: 27.004049516535307, &#39;MSE&#39;: 729.2186902914907, &#39;R2&#39;: -4.271031609559828}
+
+Accuracy for Horizon 21 days:
+{&#39;MAPE&#39;: 0.1471853208913676, &#39;MAE&#39;: 57.367099115907834, &#39;RMSE&#39;: 65.09073283340784, &#39;MSE&#39;: 4236.803500790078, &#39;R2&#39;: -5.330402448724532}
+
+Accuracy for Horizon 28 days:
+{&#39;MAPE&#39;: 0.10526133329815436, &#39;MAE&#39;: 41.21229018152836, &#39;RMSE&#39;: 51.92213368841914, &#39;MSE&#39;: 2695.9079667580695, &#39;R2&#39;: -2.578277094962406}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">shapiro</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.stattools</span> <span class="kn">import</span> <span class="n">durbin_watson</span>
+
+<span class="c1"># Asumiendo que rolling_residuals es un diccionario que contiene los residuales por cada horizonte</span>
+<span class="c1"># Ejecutar pruebas para cada conjunto de residuales asociados a cada horizonte</span>
+
+<span class="k">for</span> <span class="n">horizon</span><span class="p">,</span> <span class="n">residuals</span> <span class="ow">in</span> <span class="n">direct_residuals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Resultados de las pruebas para el horizonte de </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s2"> días:&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Test de normalidad (Shapiro-Wilk)</span>
+    <span class="k">if</span> <span class="n">residuals</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Verificar que haya residuales</span>
+        <span class="n">shapiro_test_statistic</span><span class="p">,</span> <span class="n">shapiro_p_value</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shapiro-Wilk Test Statistic: </span><span class="si">{</span><span class="n">shapiro_test_statistic</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, p-value: </span><span class="si">{</span><span class="n">shapiro_p_value</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">shapiro_p_value</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Los residuales siguen una distribución normal.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Los residuales no siguen una distribución normal.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Test de independencia (Durbin-Watson)</span>
+        <span class="n">durbin_watson_statistic</span> <span class="o">=</span> <span class="n">durbin_watson</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Durbin-Watson Statistic: </span><span class="si">{</span><span class="n">durbin_watson_statistic</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">durbin_watson_statistic</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">durbin_watson_statistic</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Los residuales muestran autocorrelación.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Los residuales son independientes.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No hay residuales disponibles para analizar.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resultados de las pruebas para el horizonte de 7 días:
+Shapiro-Wilk Test Statistic: 0.873, p-value: 0.198
+Los residuales siguen una distribución normal.
+Durbin-Watson Statistic: 0.857
+Los residuales muestran autocorrelación.
+
+Resultados de las pruebas para el horizonte de 14 días:
+Shapiro-Wilk Test Statistic: 0.881, p-value: 0.059
+Los residuales siguen una distribución normal.
+Durbin-Watson Statistic: 0.275
+Los residuales muestran autocorrelación.
+
+Resultados de las pruebas para el horizonte de 21 días:
+Shapiro-Wilk Test Statistic: 0.854, p-value: 0.005
+Los residuales no siguen una distribución normal.
+Durbin-Watson Statistic: 0.090
+Los residuales muestran autocorrelación.
+
+Resultados de las pruebas para el horizonte de 28 días:
+Shapiro-Wilk Test Statistic: 0.873, p-value: 0.003
+Los residuales no siguen una distribución normal.
+Durbin-Watson Statistic: 0.120
+Los residuales muestran autocorrelación.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span style="color:steelblue">Entrega Ejericio series de tiempo</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias"><span style="color:white">Librerias</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considere-la-serie-de-tiempo-asociada-con-los-futuros-de-la-criptomoneda-bitcoin-desde-que-comenzo-a-comercializarse-hasta-la-fecha-del-dia-de-hoy-utilice-la-api-de-yahoo-finance-para-obtener-esta-serie-de-tiempo">1.Considere la serie de tiempo asociada con los futuros de la criptomoneda Bitcoin desde que comenzó a comercializarse hasta la fecha del día de hoy. Utilice la API de <span style="color:BlueViolet">Yahoo Finance</span> para obtener esta serie de tiempo.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repita-todos-los-pasos-indicados-en-esta-seccion-para-encontrar-modelos-arima-para-predecir-el-precio-de-bitcoin-con-los-siguientes-horizontes-7-14-21-y-28-dias-utilizar-siempre-predicciones-usando-rolling-con-ventana-de-prediccion-continua-de-un-dia-cualquier-cantidad-de-pasos-extra-para-enriquecer-su-analisis-predictivo-seran-aceptados-siempre-y-cuando-sean-acordes-con-lo-que-indica-la-teoria-de-analisis-de-series-de-tiempo">2. Repita TODOS los pasos indicados en esta sección para encontrar modelos ARIMA para predecir el precio de Bitcoin con los siguientes horizontes: 7, 14, 21 y 28 días. Utilizar siempre predicciones usando rolling con ventana de predicción continua de un día. Cualquier cantidad de pasos extra para enriquecer su análisis predictivo serán aceptados siempre y cuando sean acordes con lo que indica la teoría de análisis de series de tiempo.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repita-el-paso-2-ahora-sin-utilizar-rolling-forecast-esto-es-realice-el-pronostico-solo-utilizando-forecast-para-los-diferentes-horizontes-de-prediccion-7-14-21-y-28-dias">3. Repita el paso 2 ahora sin utilizar <span style="color:Steelblue">Rolling Forecast</span>. Esto es, realice el pronóstico solo utilizando forecast() para los diferentes horizontes de predicción, 7, 14, 21 y 28 días.</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
