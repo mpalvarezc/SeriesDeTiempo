@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'TimeSeries';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+    <link rel="prev" title="Visualización científica" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -166,7 +166,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    Visualización científica
                 </a>
             </li>
         </ul>
@@ -525,7 +525,7 @@ document.write(`
       <td>452.421997</td>
       <td>457.334015</td>
       <td>457.334015</td>
-      <td>21056800</td>
+      <td>21056800.0</td>
       <td>BTC-USD</td>
     </tr>
     <tr>
@@ -536,7 +536,7 @@ document.write(`
       <td>413.104004</td>
       <td>424.440002</td>
       <td>424.440002</td>
-      <td>34483200</td>
+      <td>34483200.0</td>
       <td>BTC-USD</td>
     </tr>
     <tr>
@@ -547,7 +547,7 @@ document.write(`
       <td>384.532013</td>
       <td>394.795990</td>
       <td>394.795990</td>
-      <td>37919700</td>
+      <td>37919700.0</td>
       <td>BTC-USD</td>
     </tr>
     <tr>
@@ -558,7 +558,7 @@ document.write(`
       <td>389.882996</td>
       <td>408.903992</td>
       <td>408.903992</td>
-      <td>36863600</td>
+      <td>36863600.0</td>
       <td>BTC-USD</td>
     </tr>
     <tr>
@@ -569,7 +569,7 @@ document.write(`
       <td>393.181000</td>
       <td>398.821014</td>
       <td>398.821014</td>
-      <td>26580100</td>
+      <td>26580100.0</td>
       <td>BTC-USD</td>
     </tr>
   </tbody>
@@ -723,6 +723,11 @@ test_4w: (28,)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4, 1, 2)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -788,6 +793,12 @@ Accuracy for Horizon 28 days:
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>R2 para 7 días: El valor es aproximadamente 0.34. Esto significa que alrededor del 34% de la variabilidad en los datos se explica por el modelo. Un valor más alto indicaría una mejor capacidad del modelo para predecir los resultados reales.</p></li>
+<li><p>R2 para 14 días: El valor es aproximadamente -1.00. En este caso, el modelo parece no ser adecuado para predecir los datos, ya que el valor negativo sugiere que es peor que simplemente usar la media como predicción.</p></li>
+<li><p>R2 para 21 días: El valor es aproximadamente 0.41. Aunque no es muy alto, indica que el modelo tiene cierta capacidad para explicar la variabilidad en los datos.</p></li>
+<li><p>R2 para 28 días: El valor es aproximadamente 0.56. Esto sugiere que el modelo tiene una mejor capacidad para predecir los datos en comparación con el caso de 14 días.</p></li>
+</ul>
 </section>
 <section id="repita-el-paso-2-ahora-sin-utilizar-rolling-forecast-esto-es-realice-el-pronostico-solo-utilizando-forecast-para-los-diferentes-horizontes-de-prediccion-7-14-21-y-28-dias">
 <h2>3. Repita el paso 2 ahora sin utilizar <span style ="color:Steelblue">Rolling Forecast</span>. Esto es, realice el pronóstico solo utilizando forecast() para los diferentes horizontes de predicción, 7, 14, 21 y 28 días.<a class="headerlink" href="#repita-el-paso-2-ahora-sin-utilizar-rolling-forecast-esto-es-realice-el-pronostico-solo-utilizando-forecast-para-los-diferentes-horizontes-de-prediccion-7-14-21-y-28-dias" title="Link to this heading">#</a></h2>
@@ -841,6 +852,12 @@ Accuracy for Horizon 28 days:
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>R2 para 7 días: El valor es aproximadamente 0.24. Esto significa que alrededor del 24% de la variabilidad en los datos se explica por el modelo. Aunque no es muy alto, sugiere que el modelo tiene cierta capacidad para predecir los resultados reales.</p></li>
+<li><p>R2 para 14 días: El valor es aproximadamente -4.27. En este caso, el modelo parece no ser adecuado para predecir los datos, ya que el valor negativo sugiere que es peor que simplemente usar la media como predicción.</p></li>
+<li><p>R2 para 21 días: El valor es aproximadamente -5.33. Similar al caso de 14 días, el modelo no está funcionando bien para predecir los datos.</p></li>
+<li><p>R2 para 28 días: El valor es aproximadamente -2.58. Aunque sigue siendo negativo, es mejor que los casos anteriores.</p></li>
+</ul>
 <p>4.Realice tablas de error para los ítems 1 y 2, utilizando las métricas: MAPE, MAE, RMSE, MSE, R2. Además, agregue el gráfico de correlación entre la observación real y su predicción en el test.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -848,7 +865,6 @@ Accuracy for Horizon 28 days:
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
-<span class="c1"># Asumiendo que tienes &#39;rolling_results&#39; y &#39;direct_results&#39; bien definidos como se discutió anteriormente</span>
 <span class="c1"># Crear DataFrames para almacenar resultados</span>
 <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MAPE&#39;</span><span class="p">,</span> <span class="s1">&#39;MAE&#39;</span><span class="p">,</span> <span class="s1">&#39;RMSE&#39;</span><span class="p">,</span> <span class="s1">&#39;MSE&#39;</span><span class="p">,</span> <span class="s1">&#39;R2&#39;</span><span class="p">]</span>
 <span class="n">rolling_metrics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">horizons</span><span class="p">)</span>
@@ -883,6 +899,10 @@ Accuracy for Horizon 28 days:
 </div>
 </div>
 </div>
+<p>El modelo Rolling tiene un mejor desempeño en términos de R2 en todos los horizontes de tiempo (7, 14, 21 y 28 días) en comparación con el modelo directo.
+El modelo Rolling tiene valores de R2 más cercanos a 1, lo que indica un mejor ajuste a los datos.
+El horizonte de 28 días muestra el mejor desempeño en ambos modelos, con un R2 más alto en el modelo Rolling.
+Por lo tanto, se recomendaría utilizar el modelo Rolling con un horizonte de tiempo de 28 días para obtener predicciones más precisas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_combined_correlations</span><span class="p">(</span><span class="n">rolling_predictions</span><span class="p">,</span> <span class="n">direct_predictions</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">horizon</span><span class="p">):</span>
@@ -908,45 +928,15 @@ Accuracy for Horizon 28 days:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5201fbbb866c97456bcef620d234b9ac21775d10f4b1ca8533f697ea001ba5b4.png" src="_images/5201fbbb866c97456bcef620d234b9ac21775d10f4b1ca8533f697ea001ba5b4.png" />
-<img alt="_images/eee6b51b6a3a3bb2e9d009dde52c9bc605ec2409c538e32220863c3cbe2a036c.png" src="_images/eee6b51b6a3a3bb2e9d009dde52c9bc605ec2409c538e32220863c3cbe2a036c.png" />
-<img alt="_images/9588e032a277954631f1ecd2e3e3badcb6386fe386ac401d0e7a7398fe4e7025.png" src="_images/9588e032a277954631f1ecd2e3e3badcb6386fe386ac401d0e7a7398fe4e7025.png" />
-<img alt="_images/da51dd26a2cddd3b885493dd3e50d52d34398703af69d0e16bf77c4fda1a057f.png" src="_images/da51dd26a2cddd3b885493dd3e50d52d34398703af69d0e16bf77c4fda1a057f.png" />
+<img alt="_images/3922cfc855c91aed858f0464b8a07405cc9d1eec012530f324de2e86de4865df.png" src="_images/3922cfc855c91aed858f0464b8a07405cc9d1eec012530f324de2e86de4865df.png" />
+<img alt="_images/d5647b0c2dba94503a85061af7677a92c8948620322d23613b88e263c7aebbb3.png" src="_images/d5647b0c2dba94503a85061af7677a92c8948620322d23613b88e263c7aebbb3.png" />
+<img alt="_images/e202ab39547959f66929d802543a9b33ad12c1e463898153b0858aec6f30ae52.png" src="_images/e202ab39547959f66929d802543a9b33ad12c1e463898153b0858aec6f30ae52.png" />
+<img alt="_images/f6471395d840f84e08cae50b7d9b60d53f18152bd073f634a183ad0558eb85e0.png" src="_images/f6471395d840f84e08cae50b7d9b60d53f18152bd073f634a183ad0558eb85e0.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-
-<span class="k">def</span> <span class="nf">plot_correlations</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">actual</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">predictions</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Actual Values&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted Values&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="c1"># Supongamos que tienes acceso a los últimos valores reales y predichos de ambos métodos</span>
-<span class="k">for</span> <span class="n">horizon</span> <span class="ow">in</span> <span class="n">horizons</span><span class="p">:</span>
-    <span class="n">actual_values</span> <span class="o">=</span> <span class="n">close_prices</span><span class="p">[</span><span class="o">-</span><span class="n">horizon</span><span class="p">:]</span>  <span class="c1"># Esto asume que &#39;close_prices&#39; es la serie de precios de cierre</span>
-    <span class="n">plot_correlations</span><span class="p">(</span><span class="n">rolling_results</span><span class="p">[</span><span class="n">horizon</span><span class="p">][</span><span class="s1">&#39;Forecast&#39;</span><span class="p">],</span> <span class="n">actual_values</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Rolling Forecast Correlation for </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s1"> Days&#39;</span><span class="p">)</span>
-    <span class="n">plot_correlations</span><span class="p">(</span><span class="n">direct_results</span><span class="p">[</span><span class="n">horizon</span><span class="p">][</span><span class="s1">&#39;Forecast&#39;</span><span class="p">],</span> <span class="n">actual_values</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Direct Forecast Correlation for </span><span class="si">{</span><span class="n">horizon</span><span class="si">}</span><span class="s1"> Days&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/93b26201905ecbc626c6cb8a649382dafe6955c10b7ca335a0af478fd2b2bf20.png" src="_images/93b26201905ecbc626c6cb8a649382dafe6955c10b7ca335a0af478fd2b2bf20.png" />
-<img alt="_images/a5cbcec4944478734a3303857f345b76cbc009f791c626cc2b032edcc4870beb.png" src="_images/a5cbcec4944478734a3303857f345b76cbc009f791c626cc2b032edcc4870beb.png" />
-<img alt="_images/4c2ae0bb8178628bf3d3a18cb070897f4e9c64dafaadaeffd09683888d6d1dca.png" src="_images/4c2ae0bb8178628bf3d3a18cb070897f4e9c64dafaadaeffd09683888d6d1dca.png" />
-<img alt="_images/a85ccfa2beb04d6eb0d2fcba744c32f1a4ed58186e24eb0f9eb41a117afdea0c.png" src="_images/a85ccfa2beb04d6eb0d2fcba744c32f1a4ed58186e24eb0f9eb41a117afdea0c.png" />
-<img alt="_images/0d7ade1e84b1ce907fdcd62d342f3c3f3dcdd486c65730e954fc7d23252fe0cd.png" src="_images/0d7ade1e84b1ce907fdcd62d342f3c3f3dcdd486c65730e954fc7d23252fe0cd.png" />
-<img alt="_images/a566918f8ef235f4eca7c6cb0b5913e0374f9a5c3fa36ea9e425ef8610ef4111.png" src="_images/a566918f8ef235f4eca7c6cb0b5913e0374f9a5c3fa36ea9e425ef8610ef4111.png" />
-<img alt="_images/efd01250e7625afe5b256c8ef9a30ba9c7112a18564077370ef68d2228794a6b.png" src="_images/efd01250e7625afe5b256c8ef9a30ba9c7112a18564077370ef68d2228794a6b.png" />
-<img alt="_images/6f1eb6ba3b396ce03dce84226e9359a9d3f823da07ae6021b4f0ce78c2c6d8c5.png" src="_images/6f1eb6ba3b396ce03dce84226e9359a9d3f823da07ae6021b4f0ce78c2c6d8c5.png" />
-</div>
-</div>
+<p>En este caso, parece que las predicciones no están relativamente cerca de los valores reales y  hay cierta variabilidad.
+El modelo parece estar capturando algunas tendencias, pero también hay errores en las predicciones
+En resumen, la gráfica muestra cómo se comparan las predicciones del modelo con los valores reales en el conjunto de prueba. Si los puntos estuvieran más cerca de la línea diagonal, indicaría una correlación más fuerte entre las predicciones y los valores reales.</p>
 <p>5.Repita el análisis desarrollado en los pasos anteriores, considerando ahora el criterio de inferencia Bayesiana (BIC) y el criterio de información de Hannan–Quinn (HQIC) para encontrar el mejor modelo ARIMA y, compare los errores con aquellos obtenidos con el criterio de Akaike.</p>
 <p>Criterio BIC</p>
 <div class="cell docutils container">
@@ -1029,20 +1019,32 @@ Mejor orden BIC: (0, 1, 2)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for Horizon 7 days:
-{&#39;MAPE&#39;: 0.011417750876158194, &#39;MAE&#39;: 4.519749198457995, &#39;RMSE&#39;: 6.233772925982728, &#39;MSE&#39;: 38.859924892715256, &#39;R2&#39;: 0.3395270814233109}
+{&#39;MAPE&#39;: 0.01686496357959577, &#39;MAE&#39;: 6.588956738437308, &#39;RMSE&#39;: 8.561523274856164, &#39;MSE&#39;: 73.2996807859038, &#39;R2&#39;: -0.24581954888134683}
 
 Accuracy for Horizon 14 days:
-{&#39;MAPE&#39;: 0.030802313966989826, &#39;MAE&#39;: 12.152123726538864, &#39;RMSE&#39;: 16.63517903679374, &#39;MSE&#39;: 276.7291815861819, &#39;R2&#39;: -1.0002891901266557}
+{&#39;MAPE&#39;: 0.03372371970936255, &#39;MAE&#39;: 13.32478608593208, &#39;RMSE&#39;: 17.28040995098235, &#39;MSE&#39;: 298.61256807400974, &#39;R2&#39;: -1.158469477381014}
 
 Accuracy for Horizon 21 days:
-{&#39;MAPE&#39;: 0.032093766971680475, &#39;MAE&#39;: 12.536542388478546, &#39;RMSE&#39;: 19.86929673042893, &#39;MSE&#39;: 394.78895256183375, &#39;R2&#39;: 0.4101277173792033}
+{&#39;MAPE&#39;: 0.0333625017520935, &#39;MAE&#39;: 13.007436126289322, &#39;RMSE&#39;: 20.376750102931336, &#39;MSE&#39;: 415.2119447573122, &#39;R2&#39;: 0.3796127879564841}
 
 Accuracy for Horizon 28 days:
-{&#39;MAPE&#39;: 0.028356192820891392, &#39;MAE&#39;: 11.32265080943061, &#39;RMSE&#39;: 18.136203228786407, &#39;MSE&#39;: 328.92186755584254, &#39;R2&#39;: 0.5634221942217544}
+{&#39;MAPE&#39;: 0.028760738665762973, &#39;MAE&#39;: 11.44147395010825, &#39;RMSE&#39;: 18.555615335640077, &#39;MSE&#39;: 344.31086048424123, &#39;R2&#39;: 0.5429963927518153}
 </pre></div>
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Horizonte de 7 días:
+El R2 es negativo, aproximadamente -0.25. Esto sugiere que el modelo no se ajusta bien a los datos en este horizonte de tiempo.</p></li>
+<li><p>Horizonte de 14 días:
+El R2 es negativo, aproximadamente -1.16. Similar al caso anterior, el modelo no está funcionando bien para predecir los datos en este horizonte.</p></li>
+<li><p>Horizonte de 21 días:
+El R2 es positivo, aproximadamente 0.38. Aunque no es muy alto, indica que el modelo tiene cierta capacidad para explicar la variabilidad en los datos.</p></li>
+<li><p>Horizonte de 28 días:
+El R2 es positivo, aproximadamente 0.54. Este valor sugiere que el modelo tiene una mejor capacidad para predecir los datos en comparación con los horizontes anteriores.
+Conclusión:</p></li>
+</ul>
+<p>En general, el horizonte de 28 días muestra el mejor desempeño en términos de R2.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">arima_direct_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">):</span>
@@ -1079,20 +1081,31 @@ Accuracy for Horizon 28 days:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for Horizon 7 days:
-{&#39;Forecast&#39;: [383.3399906454841, 386.1343439523389, 386.1343439523389, 386.1343439523389, 386.1343439523389, 386.1343439523389, 386.1343439523389], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.0196305321519561, &#39;MAE&#39;: 7.705905680055001, &#39;RMSE&#39;: 8.658830427490132, &#39;MSE&#39;: 74.97534437202894, &#39;R2&#39;: -0.27429954266250345}}
+{&#39;MAPE&#39;: 0.0196305321519561, &#39;MAE&#39;: 7.705905680055001, &#39;RMSE&#39;: 8.658830427490132, &#39;MSE&#39;: 74.97534437202894, &#39;R2&#39;: -0.27429954266250345}
 
 Accuracy for Horizon 14 days:
-{&#39;Forecast&#39;: [358.8845238950348, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.05956175570601651, &#39;MAE&#39;: 23.62625239034883, &#39;RMSE&#39;: 26.40747710414675, &#39;MSE&#39;: 697.3548470060348, &#39;R2&#39;: -4.04070931064486}}
+{&#39;MAPE&#39;: 0.05956175570601651, &#39;MAE&#39;: 23.62625239034883, &#39;RMSE&#39;: 26.40747710414675, &#39;MSE&#39;: 697.3548470060348, &#39;R2&#39;: -4.04070931064486}
 
 Accuracy for Horizon 21 days:
-{&#39;Forecast&#39;: [448.3480253583249, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.11659644773345461, &#39;MAE&#39;: 45.315626494504826, &#39;RMSE&#39;: 52.22503021675011, &#39;MSE&#39;: 2727.4537811404625, &#39;R2&#39;: -3.0752138001431577}}
+{&#39;MAPE&#39;: 0.11659644773345461, &#39;MAE&#39;: 45.315626494504826, &#39;RMSE&#39;: 52.22503021675011, &#39;MSE&#39;: 2727.4537811404625, &#39;R2&#39;: -3.0752138001431577}
 
 Accuracy for Horizon 28 days:
-{&#39;Forecast&#39;: [433.5546190693511, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.06906659030932318, &#39;MAE&#39;: 27.134722241878666, &#39;RMSE&#39;: 34.31707166878355, &#39;MSE&#39;: 1177.6614079204264, &#39;R2&#39;: -0.5631093099406996}}
+{&#39;MAPE&#39;: 0.06906659030932318, &#39;MAE&#39;: 27.134722241878666, &#39;RMSE&#39;: 34.31707166878355, &#39;MSE&#39;: 1177.6614079204264, &#39;R2&#39;: -0.5631093099406996}
 </pre></div>
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Horizonte de 7 días:
+El R2 es negativo, aproximadamente -0.27. Esto sugiere que el modelo no se ajusta bien a los datos en este horizonte de tiempo. Los errores en las predicciones pueden estar afectando negativamente el desempeño.</p></li>
+<li><p>Horizonte de 14 días:
+El R2 es negativo, aproximadamente -4.04. Similar al caso anterior, el modelo no está funcionando bien para predecir los datos en este horizonte. Los errores son significativos.</p></li>
+<li><p>Horizonte de 21 días:
+El R2 es negativo, aproximadamente -3.08. Aunque hay una mejora en comparación con el horizonte de 14 días, aún no es satisfactorio.</p></li>
+<li><p>Horizonte de 28 días:
+El R2 es negativo, aproximadamente -0.56. Aunque es mejor que el caso de 14 días, sigue siendo subóptimo.</p></li>
+</ul>
+<p>En general, los modelos no están ajustando bien los datos en los horizontes de predicción más largos.</p>
 <p>Criterio HQIC</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1177,20 +1190,30 @@ Mejor orden HQIC: (4, 1, 2)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for Horizon 7 days:
-{&#39;Forecast&#39;: [383.3399906454841, 386.1343439523389, 386.1343439523389, 386.1343439523389, 386.1343439523389, 386.1343439523389, 386.1343439523389], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.0196305321519561, &#39;MAE&#39;: 7.705905680055001, &#39;RMSE&#39;: 8.658830427490132, &#39;MSE&#39;: 74.97534437202894, &#39;R2&#39;: -0.27429954266250345}}
+{&#39;MAPE&#39;: 0.014119040381654704, &#39;MAE&#39;: 5.571676423671663, &#39;RMSE&#39;: 7.527061376441137, &#39;MSE&#39;: 56.656652964711945, &#39;R2&#39;: 0.037049478512894196}
 
 Accuracy for Horizon 14 days:
-{&#39;Forecast&#39;: [358.8845238950348, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838, 368.427690674838], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.05956175570601651, &#39;MAE&#39;: 23.62625239034883, &#39;RMSE&#39;: 26.40747710414675, &#39;MSE&#39;: 697.3548470060348, &#39;R2&#39;: -4.04070931064486}}
+{&#39;MAPE&#39;: 0.03293923920628008, &#39;MAE&#39;: 13.017788090147459, &#39;RMSE&#39;: 17.15691775628878, &#39;MSE&#39;: 294.3598268960572, &#39;R2&#39;: -1.1277292708082722}
 
 Accuracy for Horizon 21 days:
-{&#39;Forecast&#39;: [448.3480253583249, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306, 449.46100819926306], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.11659644773345461, &#39;MAE&#39;: 45.315626494504826, &#39;RMSE&#39;: 52.22503021675011, &#39;MSE&#39;: 2727.4537811404625, &#39;R2&#39;: -3.0752138001431577}}
+{&#39;MAPE&#39;: 0.03294672046661341, &#39;MAE&#39;: 12.8768649449193, &#39;RMSE&#39;: 19.8851678902037, &#39;MSE&#39;: 395.41990202158826, &#39;R2&#39;: 0.40918498685032545}
 
 Accuracy for Horizon 28 days:
-{&#39;Forecast&#39;: [433.5546190693511, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907, 433.2696399701907], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.06906659030932318, &#39;MAE&#39;: 27.134722241878666, &#39;RMSE&#39;: 34.31707166878355, &#39;MSE&#39;: 1177.6614079204264, &#39;R2&#39;: -0.5631093099406996}}
+{&#39;MAPE&#39;: 0.0282857338164751, &#39;MAE&#39;: 11.268548832328813, &#39;RMSE&#39;: 18.063083785011237, &#39;MSE&#39;: 326.27499582433586, &#39;R2&#39;: 0.5669353855498482}
 </pre></div>
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Horizonte de 7 días:
+El R2 es negativo, aproximadamente -0.27. Esto sugiere que el modelo no se ajusta bien a los datos en este horizonte de tiempo.</p></li>
+<li><p>Horizonte de 14 días:
+El R2 es negativo, aproximadamente -4.04. Similar al caso anterior, el modelo no está funcionando bien para predecir los datos en este horizonte. Los errores son significativos.</p></li>
+<li><p>Horizonte de 21 días:
+El R2 es negativo, aproximadamente -3.08. Aunque hay una mejora en comparación con el horizonte de 14 días, aún no es satisfactorio.</p></li>
+<li><p>Horizonte de 28 días:
+El R2 es negativo, aproximadamente -0.56. Aunque es mejor que el caso de 14 días, sigue siendo subóptimo.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">arima_direct_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">):</span>
@@ -1227,20 +1250,32 @@ Accuracy for Horizon 28 days:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy for Horizon 7 days:
-{&#39;Forecast&#39;: [389.3044328744056, 387.63800554607155, 381.3629271017346, 389.5550210512024, 393.18521233982585, 384.66480134849655, 383.96395883757236], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.01481029810706285, &#39;MAE&#39;: 5.822864386182963, &#39;RMSE&#39;: 7.512205004613044, &#39;MSE&#39;: 56.43322403133326, &#39;R2&#39;: 0.040846932062547414}}
+{&#39;MAPE&#39;: 0.01481029810706285, &#39;MAE&#39;: 5.822864386182963, &#39;RMSE&#39;: 7.512205004613044, &#39;MSE&#39;: 56.43322403133326, &#39;R2&#39;: 0.040846932062547414}
 
 Accuracy for Horizon 14 days:
-{&#39;Forecast&#39;: [360.24822517800317, 371.3229102365422, 368.63094745026893, 372.3296362803393, 376.65411810797616, 370.0694161184088, 367.2844274850963, 373.4394887878531, 374.12467353577546, 369.31527700166066, 370.18775491868547, 373.48300809476024, 371.80109408763735, 369.8770940649629], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.052291414256686486, &#39;MAE&#39;: 20.745997484631605, &#39;RMSE&#39;: 23.384405097355913, &#39;MSE&#39;: 546.8304017572452, &#39;R2&#39;: -2.9526693036057177}}
+{&#39;MAPE&#39;: 0.052291414256686486, &#39;MAE&#39;: 20.745997484631605, &#39;RMSE&#39;: 23.384405097355913, &#39;MSE&#39;: 546.8304017572452, &#39;R2&#39;: -2.9526693036057177}
 
 Accuracy for Horizon 21 days:
-{&#39;Forecast&#39;: [447.479205090824, 449.9973950627597, 448.64809705539255, 446.8637740088647, 449.78275886189874, 450.63411505378764, 447.87663841229767, 447.89371902387296, 450.00623018327775, 449.4109124845979, 448.0070434115985, 448.8665769390704, 449.65388612294987, 448.77044106881516, 448.4515873387582, 449.21298530185044, 449.2185335562256, 448.6442677104607, 448.8163547097879, 449.19550951606885, 448.94983462104284], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.11527602927048518, &#39;MAE&#39;: 44.795400345564325, &#39;RMSE&#39;: 51.69573205835411, &#39;MSE&#39;: 2672.4487130491407, &#39;R2&#39;: -2.9930282048771435}}
+{&#39;MAPE&#39;: 0.11527602927048518, &#39;MAE&#39;: 44.795400345564325, &#39;RMSE&#39;: 51.69573205835411, &#39;MSE&#39;: 2672.4487130491407, &#39;R2&#39;: -2.9930282048771435}
 
 Accuracy for Horizon 28 days:
-{&#39;Forecast&#39;: [433.78333263512445, 434.4399352979293, 434.4060092174647, 432.89548595529124, 433.193503110392, 434.51418787548204, 434.02192398104245, 433.1076962326977, 433.69320967300536, 434.2273321685828, 433.6496123103327, 433.4079621274701, 433.9080020758886, 433.9502937628771, 433.5616255114369, 433.63832837814977, 433.9104315059795, 433.77660610320385, 433.60832044077057, 433.75628181438975, 433.84222717070054, 433.7065392621726, 433.67937729731426, 433.78942668521296, 433.77931941345406, 433.6990089458252, 433.72899206135435, 433.7813085271147], &#39;Accuracy&#39;: {&#39;MAPE&#39;: 0.06967882704795476, &#39;MAE&#39;: 27.36433425745586, &#39;RMSE&#39;: 34.59555191324797, &#39;MSE&#39;: 1196.8522121822352, &#39;R2&#39;: -0.588581253408605}}
+{&#39;MAPE&#39;: 0.06967882704795476, &#39;MAE&#39;: 27.36433425745586, &#39;RMSE&#39;: 34.59555191324797, &#39;MSE&#39;: 1196.8522121822352, &#39;R2&#39;: -0.588581253408605}
 </pre></div>
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Horizonte de 7 días:
+El R2 es positivo, aproximadamente 0.04. Aunque no es muy alto, sugiere que el modelo tiene cierta capacidad para explicar la variabilidad en los datos en este horizonte de tiempo.</p></li>
+<li><p>Horizonte de 14 días:
+El R2 es negativo, aproximadamente -2.95. Esto sugiere que el modelo no se ajusta bien a los datos en este horizonte.</p></li>
+<li><p>Horizonte de 21 días:
+El R2 es negativo, aproximadamente -2.99. Similar al caso anterior, el modelo no está funcionando bien para predecir los datos en este horizonte.</p></li>
+<li><p>Horizonte de 28 días:
+El R2 es negativo, aproximadamente -0.59. Aunque es mejor que el caso de 14 días, sigue siendo subóptimo.</p></li>
+</ul>
+<p>En general, el horizonte de 7 días muestra el mejor desempeño en términos de R2.</p>
+<p>En general el criterio AIC muestra mejores r2 y capacidad de predicción que los criterios BIC y HQIC, teniendo el valor r2 más alto para el horizonte de tiempo de 28 días de 0.56, seguido por el criterio BIC para el mismo horizonte con un r2 de 0.54</p>
 <ol class="arabic simple" start="6">
 <li><p>Escriba en cada paso las conclusiones y análisis estadísticos asociados con los resultados obtenidos. Realice tests de normalidad e independencia para los residuales obtenidos para cada predicción, en cada caso agregue las correspondientes conclusiones. Figuras y algoritmos que no estén acompañados de una conclusión, descripción y análisis estadístico, no serán tenidas en cuenta.</p></li>
 </ol>
@@ -1359,6 +1394,8 @@ Los residuales son independientes.
 </div>
 </div>
 </div>
+<p>Basandose en los resultados obtenidos y considerando tanto el R2 como otros indicadores de precisión, podemos concluir lo siguiente:</p>
+<p>El modelo Rolling parece tener un mejor desempeño en términos de R2 en comparación con el modelo directo en todos los horizontes de tiempo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">arima_direct_forecast</span><span class="p">(</span><span class="n">close_prices</span><span class="p">,</span> <span class="n">horizons</span><span class="p">):</span>
@@ -1474,6 +1511,8 @@ Los residuales muestran autocorrelación.
 </div>
 </div>
 </div>
+<p>Dado que la autocorrelación persiste en todos los horizontes, podría ser preferible elegir el modelo con menor autocorrelación.
+En este caso, el horizonte de 21 días muestra una combinación aceptable de normalidad y baja autocorrelación.</p>
 </section>
 </section>
 
@@ -1513,7 +1552,7 @@ Los residuales muestran autocorrelación.
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+        <p class="prev-next-title">Visualización científica</p>
       </div>
     </a>
 </div>
